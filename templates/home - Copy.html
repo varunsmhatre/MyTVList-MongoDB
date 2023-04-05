@@ -1,0 +1,30 @@
+{% extends "task/base.html" %}
+{% block content %}
+<br>
+<div class="container"><h3 style="display: inline;">My Tasks</h3>
+<a class="btn btn-primary mb-2 ml-2" href="{% url 'task-create'%}" role="button">Add New Task</a>
+</div>  
+<table class="table table-hover">
+  <thead>
+      <tr class="table-secondary">
+        <th scope="col">#</th>
+        {%  for col_name in tasks.0 %}
+          {% if "breached" not in col_name and "id" not in col_name %}
+            <th scope="col">{{ col_name }}</th>
+          {% endif %}
+        {% endfor %}
+        <th scope="col">Edit</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in tasks %}
+        <tr class="{% if row.breached %} table-danger{% endif %}">
+          <th scope="row">{{forloop.counter}}</th>
+            <td>{{ row.title }}</td>
+            <td>{{ row.start_date }}</td>
+            <td>{{ row.end_date }}</td>
+            <td><a class="btn btn-dark" href="{% url 'task-update' row.id %}" role="button">Modify</a></td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock content %}

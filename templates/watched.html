@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<table class="table table-hover">
+    <thead>
+        <tr class="table-secondary">
+            <th scope="col">#</th>
+            {% for col_name in columns %}
+                <th scope="col">{{ col_name }}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in data_list %}
+            <tr class="">
+                <th>{{loop.index}}</th>
+                <td> <img src="{{ item.poster }}" class="img-fluid" alt="Movie Poster"> </td>
+                <td>{{ item.title }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}
